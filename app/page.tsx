@@ -1,5 +1,5 @@
 import TextareaSection from "@/components/TextareaSection";
-import TranslationSection from "@/components/TranslationSection";
+
 
 export default function Home() {
   return (
@@ -14,9 +14,9 @@ export default function Home() {
           <br /> Wypróbuj teraz!
         </p>
       </div>
-      <div  className='flex flex-col place-items-center gap-6 w-full bg-white rounded-lg shadow-md p-4'>
+      <div  className='flex flex-col place-items-center gap-6 w-full  bg-white rounded-lg shadow-md p-8'>
 
-      <TranslationSection/>
+      
       <TextareaSection />
       </div>
     </main>
