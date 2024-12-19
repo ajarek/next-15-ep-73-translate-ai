@@ -15,15 +15,19 @@ import React from "react"
 
 const TextareaSection = () => {
   const [translation, setTranslation] = React.useState("")
-
+  const formRef = React.useRef<HTMLFormElement>(null)
   return (
-    <form
-      className='w-full grid grid-cols-2 gap-6'
-      action={async (formData: FormData) => {
-        await translate(formData)
-        setTranslation((await translate(formData)).translation)
-      }}
-    >
+  
+<form ref={formRef} 
+   className='w-full grid grid-cols-2 max-sm:grid-cols-1 gap-6'
+  action={async (formData: FormData) => {
+    await translate(formData)
+    setTranslation((await translate(formData)).translation)
+    formRef.current?.reset() 
+  }}
+>
+
+    
       <div className=' flex flex-col items-start gap-2 '>
         <Select required name='languageFrom'defaultValue='Polski'>
           <SelectTrigger className='w-[180px]'>
