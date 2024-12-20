@@ -2,7 +2,7 @@
 
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "./ui/button"
-import { Mic } from "lucide-react"
+
 import { translate } from "@/lib/translate"
 import {
   Select,
@@ -12,10 +12,12 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import React from "react"
+import SpeechToText from "./SpeechToText"
 
 const TextareaSection = () => {
   const [translation, setTranslation] = React.useState("")
   const formRef = React.useRef<HTMLFormElement>(null)
+  const [transcript, setTranscript] = React.useState<string>('');
   return (
   
 <form ref={formRef} 
@@ -43,6 +45,7 @@ const TextareaSection = () => {
           placeholder='Wpisz tutaj swoją wiadomość.'
           className=''
           name='text'
+          defaultValue={transcript}
         />
       </div>
       <div className=' flex flex-col items-start gap-2 '>
@@ -66,12 +69,9 @@ const TextareaSection = () => {
         <Button type='submit' className='w-fit'>
           translate
         </Button>
-        <Button
-          size={"icon"}
-          className='bg-transparent text-black shadow-none hover:text-white rounded-full'
-        >
-          <Mic />
-        </Button>
+        
+      <SpeechToText setTranscript={setTranscript} />
+    
       </div>
     </form>
   )
