@@ -17,21 +17,22 @@ import SpeechToText from "./SpeechToText"
 const TextareaSection = () => {
   const [translation, setTranslation] = React.useState("")
   const formRef = React.useRef<HTMLFormElement>(null)
-  const [transcript, setTranscript] = React.useState<string>('');
+  const [transcript, setTranscript] = React.useState<string>("")
+  const [language, setLanguage] = React.useState<string>("Angielski")
+  console.log(language)
   return (
-  
-<form ref={formRef} 
-   className='w-full grid grid-cols-2 max-sm:grid-cols-1 gap-6'
-  action={async (formData: FormData) => {
-    await translate(formData)
-    setTranslation((await translate(formData)).translation)
-    formRef.current?.reset() 
-  }}
->
-
-    
+    <form
+      ref={formRef}
+      className='w-full grid grid-cols-2 max-sm:grid-cols-1 gap-6'
+      action={async (formData: FormData) => {
+        await translate(formData)
+        setTranslation((await translate(formData)).translation)
+        
+        formRef.current?.reset()
+      }}
+    >
       <div className=' flex flex-col items-start gap-2 '>
-        <Select required name='languageFrom'defaultValue='Polski'>
+        <Select required name='languageFrom' defaultValue='Polski'>
           <SelectTrigger className='w-[180px]'>
             <SelectValue placeholder='Wybierz Język' />
           </SelectTrigger>
@@ -49,9 +50,9 @@ const TextareaSection = () => {
         />
       </div>
       <div className=' flex flex-col items-start gap-2 '>
-      <Select required name='languageTo' defaultValue='Angielski'>
+        <Select required name='languageTo' defaultValue='Angielski'onValueChange={(value) => setLanguage(value)} >
           <SelectTrigger className='w-[180px]'>
-            <SelectValue placeholder='Wybierz Język'  />
+            <SelectValue placeholder='Wybierz Język' />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value='Polski'>Polski</SelectItem>
@@ -62,16 +63,17 @@ const TextareaSection = () => {
         <Textarea
           placeholder='Wpisz tutaj swoją wiadomość.'
           className=''
-         defaultValue={translation}
+          defaultValue={translation}
         />
-        </div>
+      </div>
       <div className='flex items-center gap-4'>
         <Button type='submit' className='w-fit'>
           translate
         </Button>
-        
-      <SpeechToText setTranscript={setTranscript} />
-    
+      {language==='Angielski'?
+        <SpeechToText setTranscript={setTranscript}  />
+        :null
+      }
       </div>
     </form>
   )

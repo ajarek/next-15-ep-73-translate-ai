@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Mic } from "lucide-react"
-
-const SpeechToText: React.FC<{ setTranscript: (transcript: string) => void }> = ({ setTranscript }) => {
+import {  Mic } from "lucide-react"
+type SpeechToTextProps = {
+  setTranscript: (transcript: string) => void;
+  
+};
+const SpeechToText: React.FC<SpeechToTextProps> = ({ setTranscript})  => {
   const [isRecording, setIsRecording] = useState<boolean>(false);
   
 
@@ -16,7 +19,7 @@ const SpeechToText: React.FC<{ setTranscript: (transcript: string) => void }> = 
       }
 
       const recognition = new SpeechRecognition();
-      recognition.lang = 'en-US'; // Set language
+      recognition.lang = 'pl-PL' // Set language
       recognition.interimResults = false; // Disable partial results
       recognition.maxAlternatives = 1;
 
@@ -49,6 +52,7 @@ const SpeechToText: React.FC<{ setTranscript: (transcript: string) => void }> = 
       <button onClick={startRecognition} disabled={isRecording}>
         {isRecording ? 'Listening...' : <Mic/>}
       </button>
+      
       <div>
         
       </div>
