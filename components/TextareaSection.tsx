@@ -1,24 +1,23 @@
-"use client"
+'use client'
 
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "./ui/button"
-
-import { translate } from "@/lib/translate"
+import { Textarea } from '@/components/ui/textarea'
+import { Button } from './ui/button'
+import { translate } from '@/lib/translate'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import React from "react"
-import SpeechToText from "./SpeechToText"
+} from '@/components/ui/select'
+import React from 'react'
+import SpeechToText from './SpeechToText'
 
 const TextareaSection = () => {
-  const [translation, setTranslation] = React.useState("")
+  const [translation, setTranslation] = React.useState('')
   const formRef = React.useRef<HTMLFormElement>(null)
-  const [transcript, setTranscript] = React.useState<string>("")
-  const [language, setLanguage] = React.useState<string>("Angielski")
+  const [transcript, setTranscript] = React.useState<string>('')
+  const [language, setLanguage] = React.useState<string>('Angielski')
   console.log(language)
   return (
     <form
@@ -27,12 +26,16 @@ const TextareaSection = () => {
       action={async (formData: FormData) => {
         await translate(formData)
         setTranslation((await translate(formData)).translation)
-        
+
         formRef.current?.reset()
       }}
     >
       <div className=' flex flex-col items-start gap-2 '>
-        <Select required name='languageFrom' defaultValue='Polski'>
+        <Select
+          required
+          name='languageFrom'
+          defaultValue='Polski'
+        >
           <SelectTrigger className='w-[180px]'>
             <SelectValue placeholder='Wybierz Język' />
           </SelectTrigger>
@@ -50,7 +53,12 @@ const TextareaSection = () => {
         />
       </div>
       <div className=' flex flex-col items-start gap-2 '>
-        <Select required name='languageTo' defaultValue='Angielski'onValueChange={(value) => setLanguage(value)} >
+        <Select
+          required
+          name='languageTo'
+          defaultValue='Angielski'
+          onValueChange={(value) => setLanguage(value)}
+        >
           <SelectTrigger className='w-[180px]'>
             <SelectValue placeholder='Wybierz Język' />
           </SelectTrigger>
@@ -67,13 +75,15 @@ const TextareaSection = () => {
         />
       </div>
       <div className='flex items-center gap-4'>
-        <Button type='submit' className='w-fit'>
+        <Button
+          type='submit'
+          className='w-fit'
+        >
           translate
         </Button>
-      {language==='Angielski'?
-        <SpeechToText setTranscript={setTranscript}  />
-        :null
-      }
+        {language === 'Angielski' ? (
+          <SpeechToText setTranscript={setTranscript} />
+        ) : null}
       </div>
     </form>
   )

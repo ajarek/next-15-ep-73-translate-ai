@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import {  Mic } from "lucide-react"
 type SpeechToTextProps = {
@@ -27,12 +28,12 @@ const SpeechToText: React.FC<SpeechToTextProps> = ({ setTranscript})  => {
         setIsRecording(true);
       };
 
-      recognition.onresult = (event: SpeechRecognitionEvent) => {
+      recognition.onresult = (event: any) => {
         const result = event.results[0][0].transcript;
         setTranscript(result);
       };
 
-      recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+      recognition.onerror = (event: any) => {
         console.error('Speech recognition error:', event.error);
       };
 
