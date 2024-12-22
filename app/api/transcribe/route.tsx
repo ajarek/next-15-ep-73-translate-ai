@@ -32,8 +32,6 @@ export async function POST(request: NextRequest) {
       { text: 'Please transcribe the audio.' },
     ])
 
-    // Print the response.
-    console.log(result.response.text())
     return Response.json({ result: result.response.text() })
   } catch (error) {
     return Response.json({ error })

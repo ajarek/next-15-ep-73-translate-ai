@@ -22,10 +22,9 @@ async function translateText({
 
   try {
     const result = await model.generateContent(prompt + additional_prompt)
-    console.log(result.response.text())
     return result.response.text()
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
   return "couldn't load translations"
 }

@@ -18,7 +18,7 @@ const TextareaSection = () => {
   const formRef = React.useRef<HTMLFormElement>(null)
   const [transcript, setTranscript] = React.useState<string>('')
   const [language, setLanguage] = React.useState<string>('Angielski')
-  console.log(language)
+
   return (
     <form
       ref={formRef}
@@ -35,14 +35,15 @@ const TextareaSection = () => {
           required
           name='languageFrom'
           defaultValue='Polski'
+          aria-label='Wybierz Język'
         >
           <SelectTrigger className='w-[180px]'>
             <SelectValue placeholder='Wybierz Język' />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value='Polski'>Polski</SelectItem>
-            <SelectItem value='Angielski'>Angielski</SelectItem>
-            <SelectItem value='Hiszpański'>Hiszpański</SelectItem>
+            <SelectItem value='Polski' aria-label='Polski'>Polski</SelectItem>
+            <SelectItem value='Angielski' aria-label='Angielski'>Angielski</SelectItem>
+            <SelectItem value='Hiszpański' aria-label='Hiszpański'>Hiszpański</SelectItem>
           </SelectContent>
         </Select>
         <Textarea
@@ -50,6 +51,7 @@ const TextareaSection = () => {
           className=''
           name='text'
           defaultValue={transcript}
+          aria-label='Wpisz tutaj swoją wiadomość.'
         />
       </div>
       <div className=' flex flex-col items-start gap-2 '>
@@ -58,26 +60,29 @@ const TextareaSection = () => {
           name='languageTo'
           defaultValue='Angielski'
           onValueChange={(value) => setLanguage(value)}
+          aria-label='Wybierz Język'
         >
           <SelectTrigger className='w-[180px]'>
             <SelectValue placeholder='Wybierz Język' />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value='Polski'>Polski</SelectItem>
-            <SelectItem value='Angielski'>Angielski</SelectItem>
-            <SelectItem value='Hiszpański'>Hiszpański</SelectItem>
+            <SelectItem value='Polski' aria-label='Polski'>Polski</SelectItem>
+            <SelectItem value='Angielski' aria-label='Angielski'>Angielski</SelectItem>
+            <SelectItem value='Hiszpański' aria-label='Hiszpański'>Hiszpański</SelectItem>
           </SelectContent>
         </Select>
         <Textarea
           placeholder='Wpisz tutaj swoją wiadomość.'
           className=''
           defaultValue={translation}
+          aria-label='Wpisz tutaj swoją wiadomość.'
         />
       </div>
       <div className='flex items-center gap-4'>
         <Button
           type='submit'
           className='w-fit'
+          aria-label='Przetłumacz'
         >
           translate
         </Button>
